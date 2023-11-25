@@ -377,9 +377,13 @@ def sidebar():
     ...
     return pizza_data_record, [topping1, topping2, topping3]
 ```
-Der Aufruf der `sidebar()` Funktion soll wie folgt erweitert werden:
+Der Aufruf der `sidebar()` Funktion soll wie folgt erweitert werden.
+Die nicht gesetzten Toppings werden aus der Liste der Toppings rausgefiltert.
 ```python
 pizza_data_record, toppings = sidebar()
+
+# remove "no ..." toppings
+toppings = [topping for topping in toppings if not topping.startswith("no ")]
 ```
  
 Für die Generierung der Bilder estellen wir eine Funktion, welche das Bild generiert und die URL für das generierte Bild zurückgibt.
@@ -403,6 +407,9 @@ Nun kann das Bild generiert und in die App eingefügt werden.
 ```python
 # load sidebar and get input data
 pizza_data_record, toppings = sidebar()
+
+# remove "no ..." toppings
+toppings = [topping for topping in toppings if not topping.startswith("no ")]
 
 # generate pizza image
 st.image(generate_pizza_image(toppings, img_gen_model="picsum"), width=400)
@@ -488,6 +495,9 @@ model = create_model(csv_file="pizza_dataset_relative_price.csv")
 
 # load sidebar and get input data
 pizza_data_record, toppings = sidebar()
+
+# remove "no ..." toppings
+toppings = [topping for topping in toppings if not topping.startswith("no ")]
 
 # predict price
 price = predict_price(pizza_data_record, model)
