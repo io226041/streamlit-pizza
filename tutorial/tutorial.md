@@ -18,7 +18,7 @@ statsmodels~=0.14.0
 Committen Sie die Änderungen.
 Damit die in `requirements.txt` angegebenen Python-Bibliotheken auf dem App-Server installiert werden, muss die App neugestartet werden. Neustart kann durch "Manage app" -> "Reboot app" initiiert werden:
 
-![img_1.png](img_1.png)
+![img_1.png](img/img_1.png)
 
 ## Pizza-Daten Datei einfügen
 
@@ -214,7 +214,7 @@ rating = st.sidebar.select_slider("Restaurant Raiting", [1, 2, 3, 4, 5, 6], 4, f
 
 Die App soll nun wie folgt im Browser aussehen:
 
-![img_3.png](img_3.png)
+![img_3.png](img/img_3.png)
 
 ## Aus Eingabedaten einen Daten-Record erzeugen
 Im nächsten Schritt sollen alle Eingabedaten aus der Sidedbar einen Pizza-Daten-Record erzeugen.
@@ -282,7 +282,7 @@ price = predict_price(pizza_data_record, model)
 
 So sieht die App im Browser aus.
 
-![img_4.png](img_4.png)
+![img_4.png](img/img_4.png)
 
 ## Gesamter Code bis jetzt
 <details>
@@ -409,7 +409,7 @@ st.image(generate_pizza_image(toppings, img_gen_model="picsum"), width=400)
 ``` 
 So sieht die App im Browser aus.
 
-![img_5.png](img_5.png)
+![img_5.png](img/img_5.png)
 
 
 
@@ -507,9 +507,9 @@ Da der App-Code in der Cloud und ggf. öffentlich verfügbar ist, sollte der pri
 
 Speichern Sie den Key im Secret-Bereich unter App-Settings auf der Streamlit-Plattform:
 
-![img_6.png](img_6.png)
+![img_6.png](img/img_6.png)
 
-![img_7.png](img_7.png)
+![img_7.png](img/img_7.png)
 
 Damit der OpenAI-Client Code den Key zur Laufzeit nutzen kann, muss der Key aus der secret-Datei in die Laufzeitumgebung geladen werden.
 Fügen Sie folgenden Code ein:
@@ -566,7 +566,7 @@ st.image(generate_pizza_image(toppings, img_gen_model="dall-e-2"), width=400)
 
 Nun sieht die App so aus:
 
-![img_8.png](img_8.png)
+![img_8.png](img/img_8.png)
 
 ## Bild-Generator Engine zur Laufzeit ändern
 
@@ -580,4 +580,4 @@ def sidebar():
 
 Nun kann das Img-Gen-Engine zur Laufzeit geändert werden:
 
-![img_9.png](img_9.png)
+![img_9.png](img/img_9.png)
