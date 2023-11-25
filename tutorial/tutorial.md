@@ -394,7 +394,7 @@ Fügen sie folgenden Code ein:
 ```python
 def generate_pizza_image(toppings, img_gen_model):
     if img_gen_model == 'picsum':
-        seed = "-".join(toppings)
+        seed = "-".join(toppings) if toppings else "no topics"
         return f"https://picsum.photos/seed/{seed}/200" 
     return ""
 ```
@@ -472,7 +472,7 @@ def sidebar():
 
 def generate_pizza_image(toppings, img_gen_model):
     if img_gen_model == 'picsum':
-        seed = "-".join(map(str, toppings))
+        seed = "-".join(toppings) if toppings else "no topics"
         return f"https://picsum.photos/seed/{seed}/200"
     return ""
 
@@ -552,10 +552,11 @@ Nun kann der DALL-E Engine für die Generierung der Pizza-Bilder genutzt werden.
 ```python
 def generate_pizza_image(toppings, img_gen_model):
     if img_gen_model == 'picsum':
-        seed = "-".join(toppings)
+        seed = "-".join(toppings) if toppings else "no topics"
         return f"https://picsum.photos/seed/{seed}/200"
     if img_gen_model == 'dall-e-2':
-        prompt = f"One round pizza on a black table with toppings: {', '.join(toppings)}"
+        topping = ",".join(toppings) if toppings else "no topics"
+        prompt = f"One round pizza on a black table with toppings: {topping}"
         return dalle_request(prompt, img_gen_model, "1024x1024")
     return ""
 ```
