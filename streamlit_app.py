@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from statsmodels import api as sm
+import os
+from openai import OpenAI
+
+os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
 
 
 def create_model(csv_file):
@@ -45,17 +49,36 @@ def sidebar():
         'Extra Cheese': int(extra_cheese),                # 0: no, 1: yes
         'Distance to City Center (km)': distance,         # 1,3,5,10 km
         'Restaurant': location_choice,                    # 0: Take-Away, 1: Dine-In
-        'Rating': rating                                  # 1,2,3,4,5,6 Stars
+        'Rating': rating,                                 # 1,2,3,4,5,6 Stars
     }
-    return pizza_data_record
+    return pizza_data_record, [topping1, topping2, topping3]
 
 
 def generate_pizza_image(toppings, img_gen_model):
     if img_gen_model == 'picsum':
-        seed = "-".join(map(str, toppings))
+        seed = "-".join(toppings)
         return f"https://picsum.photos/seed/{seed}/200"
+    if img_gen_model == 'dall-e-2':
+        prompt = f"One round pizza on a black table with toppings: {', '.join(toppings)}"
+        return dalle_request(prompt, img_gen_model, "1024x1024")
     return ""
 
+
+def dalle_request(prompt, img_gen_model, img_size):
+    try:
+        client = OpenAI()
+        response = client.images.generate(
+            model=img_gen_model,
+            prompt=prompt,
+            size=img_size,
+            quality="standard",
+            n=1,
+        )
+        # response.raise_for_status()  # Raise an error for bad responses (e.g., 4xx, 5xx)
+        return response.data[0].url
+    except Exception as e:
+        st.error(f"Error making DALL-E API request: {e}")
+        return ""
 
 ###################
 #    App Start    #
@@ -67,12 +90,13 @@ st.title("Pizza Price Predictor")
 model = create_model(csv_file="pizza_dataset_relative_price.csv")
 
 # load sidebar and get input data
-pizza_data_record = sidebar()
+pizza_data_record, toppings = sidebar()
 
 # predict price
 price = predict_price(pizza_data_record, model)
 st.header(f"price: {price:.2f} €")
 
 # generate pizza image
-toppings = [pizza_data_record["Topping 1"], pizza_data_record["Topping 2"], pizza_data_record["Topping 3"]]
-st.image(generate_pizza_image(toppings, img_gen_model="picsum"), width=400)
+# st.image(generate_pizza_image(toppings, img_gen_model="picsum"), width=400)
+st.image(generate_pizza_image(toppings, img_gen_model="dall-e-2"), width=400)
+
