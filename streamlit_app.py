@@ -51,7 +51,9 @@ def sidebar():
         'Restaurant': location_choice,                    # 0: Take-Away, 1: Dine-In
         'Rating': rating,                                 # 1,2,3,4,5,6 Stars
     }
-    return pizza_data_record, [topping1, topping2, topping3]
+
+    img_gen_engine = st.sidebar.selectbox(label=f"Img Gen Engine", options=(["picsum", "dall-e-2"]))
+    return pizza_data_record, [topping1, topping2, topping3], img_gen_engine
 
 
 def generate_pizza_image(toppings, img_gen_model):
@@ -90,7 +92,7 @@ st.title("Pizza Price Predictor")
 model = create_model(csv_file="pizza_dataset_relative_price.csv")
 
 # load sidebar and get input data
-pizza_data_record, toppings = sidebar()
+pizza_data_record, toppings, img_gen_engine = sidebar()
 
 # predict price
 price = predict_price(pizza_data_record, model)
@@ -98,5 +100,5 @@ st.header(f"price: {price:.2f} €")
 
 # generate pizza image
 # st.image(generate_pizza_image(toppings, img_gen_model="picsum"), width=400)
-st.image(generate_pizza_image(toppings, img_gen_model="dall-e-2"), width=400)
+st.image(generate_pizza_image(toppings, img_gen_model=img_gen_engine), width=400)
 
