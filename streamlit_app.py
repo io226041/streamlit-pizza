@@ -37,7 +37,7 @@ pizza_data_record = {
 }
 
 # create model
-model = create_model(csv_file="data/pizza_dataset_relative_price.csv")
+model = create_model(csv_file="pizza_dataset_relative_price.csv")
 st.write(model.summary())
 
 # predict price
