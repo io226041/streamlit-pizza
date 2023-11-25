@@ -4,7 +4,9 @@
 ## Streamlit einrichten
 
 Unter folgendem Link finden Sie eine Einleitung, wie die Streamlit eingerichtet und eine App erstellt und über GitHub eingerichtet werden kann.   
-https://youtu.be/HKoOBiAaHGg
+https://docs.streamlit.io/streamlit-community-cloud/get-started/connect-your-github-account
+
+Oder alternativ über Youtube: https://youtu.be/HKoOBiAaHGg
 
 Folgen Sie der Anleitung und erstellen Sie ihre eigene App.
 
