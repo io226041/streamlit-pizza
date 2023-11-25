@@ -560,6 +560,10 @@ def generate_pizza_image(toppings, img_gen_model):
     return ""
 ```
 Damit kann die Bildgenerator-Funktion mit den neuen Enging `dall-e-2` aufgerufen werden:
+<div style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 0.25rem; padding: 1rem; margin-bottom: 1rem;">
+    <b>Vorsicht:</b> Die Nutzung von DALL-E Modell verursacht Kosten.
+</div>
+
 ```python
 st.image(generate_pizza_image(toppings, img_gen_model="dall-e-2"), width=400)
 ```
