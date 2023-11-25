@@ -10,4 +10,4 @@ X = df.drop(['Relative Price', 'Pizza Name', 'Topping 3_Meat', 'Topping 3_None',
 X = sm.add_constant(X)
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.30, random_state=1)
 model = sm.OLS(y_train, X_train).fit()
-print("model created")
+st.write("model created")
