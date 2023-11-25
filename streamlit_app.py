@@ -58,10 +58,11 @@ def sidebar():
 
 def generate_pizza_image(toppings, img_gen_model):
     if img_gen_model == 'picsum':
-        seed = "-".join(toppings)
+        seed = "-".join(toppings) if toppings else "no topics"
         return f"https://picsum.photos/seed/{seed}/200"
     if img_gen_model == 'dall-e-2':
-        prompt = f"One round pizza on a black table with toppings: {', '.join(toppings)}"
+        topping = ",".join(toppings) if toppings else "no topics"
+        prompt = f"One round pizza on a black table with toppings: {topping}"
         return dalle_request(prompt, img_gen_model, "1024x1024")
     return ""
 
@@ -94,6 +95,9 @@ model = create_model(csv_file="pizza_dataset_relative_price.csv")
 
 # load sidebar and get input data
 pizza_data_record, toppings, img_gen_engine = sidebar()
+
+# remove "no ..." toppings
+toppings = [topping for topping in toppings if not topping.startswith("no ")]
 
 # predict price
 price = predict_price(pizza_data_record, model)
