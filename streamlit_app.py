@@ -50,6 +50,13 @@ def sidebar():
     return pizza_data_record
 
 
+def generate_pizza_image(toppings, img_gen_model):
+    if img_gen_model == 'picsum':
+        seed = "-".join(map(str, toppings))
+        return f"https://picsum.photos/seed/{seed}/200"
+    return ""
+
+
 ###################
 #    App Start    #
 ###################
@@ -66,3 +73,6 @@ pizza_data_record = sidebar()
 price = predict_price(pizza_data_record, model)
 st.header(f"price: {price:.2f} €")
 
+# generate pizza image
+toppings = [pizza_data_record["Topping 1"], pizza_data_record["Topping 2"], pizza_data_record["Topping 3"]]
+st.image(generate_pizza_image(toppings, img_gen_model="picsum"), width=400)
