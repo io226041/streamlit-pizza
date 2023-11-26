@@ -11,7 +11,7 @@ Oder alternativ über Youtube: https://youtu.be/HKoOBiAaHGg
 Folgen Sie der Anleitung und erstellen Sie ihre eigene App.
 
 ## Python Bibliotheken installieren
-Damit der Server, auf welchem die Streamlit-App läuft, alle benötigten Bibliotheken installieren kann, muss die Liste dieser Bibliotheken dem App-Projekt hinzugefügt werden. Erstellen Sie dafür eine neue Datei `requirements.txt` neben der `streamlit.py`-Datei mit foldendem Inhalt:
+Damit der Server, auf welchem die Streamlit-App läuft, alle benötigten Bibliotheken installieren kann, muss die Liste dieser Bibliotheken dem App-Projekt hinzugefügt werden. Erstellen Sie dafür eine neue Datei `requirements.txt` neben der `streamlit_app.py`-Datei mit foldendem Inhalt:
 ```properties
 pandas~=2.1.3
 scikit-learn~=1.3.2
